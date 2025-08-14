@@ -1,0 +1,37 @@
+{
+  "name": "nitro-router",
+  "type": "commonjs",
+  "devDependencies": {
+    "@eslint/js": "9.32.0",
+    "@types/express": "5.0.3",
+    "@types/multer": "2.0.0",
+    "@types/node": "24.2.0",
+    "@typescript-eslint/eslint-plugin": "8.39.0",
+    "@typescript-eslint/parser": "8.39.0",
+    "cors": "2.8.5",
+    "eslint": "9.32.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-config-standard": "17.1.0",
+    "eslint-plugin-import": "2.32.0",
+    "eslint-plugin-prettier": "5.5.4",
+    "eslint-plugin-promise": "7.2.1",
+    "typescript": "5.9.2"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "nitro-router": "^0.3.5",
+    "zod": "^4.0.17"
+  },
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "start": "node dist/src/index.js",
+    "build": "swc src -d dist && tsc --emitDeclarationOnly --outDir dist",
+    "build:clean": "rm -rf dist && npm run build",
+    "prepublishOnly": "npm run build:clean",
+    "lint": "eslint --ext .ts,.tsx .",
+    "lint:fix": "eslint --fix --ext .ts,.tsx .",
+    "prettier": "prettier --config .prettierrc 'src/**/*.ts' --write",
+    "type-check": "tsc --noEmit",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
