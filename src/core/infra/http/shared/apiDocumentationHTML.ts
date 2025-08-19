@@ -1,6 +1,8 @@
+import type { OpenAPIObjectConfig } from '@asteasolutions/zod-to-openapi/dist/v3.0/openapi-generator'
+
 import { openApi } from 'nitro-router'
 
-export default function apiDocumentationHTML(documentation: ReturnType<typeof openApi>) {
+export default function apiDocumentationHTML(documentation: OpenAPIObjectConfig) {
   const htmlContent = `
 <!doctype html>
 <html>
@@ -14,7 +16,7 @@ export default function apiDocumentationHTML(documentation: ReturnType<typeof op
     <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
     <script>
       const blob = new Blob([JSON.stringify(${JSON.stringify(
-        documentation
+        openApi(documentation)
       )})], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       Scalar.createApiReference('#app', { url });
