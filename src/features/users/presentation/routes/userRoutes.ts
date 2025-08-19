@@ -1,12 +1,26 @@
 import { NitroRouter } from 'nitro-router'
 import { z } from 'zod'
+import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi'
 
 import { userRepositoryImpl } from '../../infrastructure/userRepositoryImpl'
 
 import { makeCreateUser } from '../../application/createUser'
 import { makeListUsers } from '../../application/listUsers'
 
+// Extend Zod with OpenAPI functionality
+extendZodWithOpenApi(z)
+
 export const userRoutes = new NitroRouter()
+
+const createUserSchema = z.object({
+  name: z.string(),
+  email: z.email(),
+})
+
+const listUsersQuerySchema = z.object({
+  page: z.number().min(1).default(1),
+  limit: z.number().min(1).max(100).default(10),
+})
 
 userRoutes.post(
   '/users',
@@ -18,10 +32,7 @@ userRoutes.post(
   {
     tags: ['Users'],
     summary: 'Criar um novo usuário',
-    body: z.object({
-      name: z.string(),
-      email: z.email(),
-    }),
+    body: createUserSchema,
   }
 )
 
@@ -35,9 +46,6 @@ userRoutes.get(
   {
     tags: ['Users'],
     summary: 'Listar usuários',
-    query: z.object({
-      page: z.coerce.number().min(1).default(1),
-      limit: z.coerce.number().min(1).max(100).default(10),
-    }),
+    query: listUsersQuerySchema,
   }
 )

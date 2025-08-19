@@ -1,20 +1,21 @@
 import express from 'express'
 
-import { errorHandler } from '@/core/infra/http/middleware/errorHandler'
-import apiDocumentationHTML from '@/core/utils/apiDocumentationHTML'
+import { userRoutes } from './features/users/presentation/routes/userRoutes'
+import { errorHandler } from './core/infra/http/middleware/errorHandler'
+import apiDocumentationHTML from './core/utils/apiDocumentationHTML'
 
-import { userRoutes } from '@/features/users/presentation/routes/userRoutes'
+const PORT = 8000
+const url = `http://localhost:${PORT}`
 
 const app = express()
 app.use(express.json())
 
 app.use(userRoutes.export())
 
-app.get('/', (_, res) => {
-  return res.json({ status: 'oks' })
+app.get('/', () => {
+  return 'Welcome to the Nitro Router API'
 })
 
-// Endpoint para retornar a documentação OpenAPI
 app.get('/docs', (_, res) => {
   res.send(
     apiDocumentationHTML({
@@ -24,20 +25,19 @@ app.get('/docs', (_, res) => {
         version: '1.0.0',
         description: 'Documentação da API',
       },
-      servers: [{ url: 'http://localhost:3000', description: 'Servidor de desenvolvimento' }],
+      servers: [{ url, description: 'Servidor de desenvolvimento' }],
     })
   )
 })
 
 app.use(errorHandler)
 
-const PORT = 8000
 app.listen(PORT, () => {
   console.log(`
-─────────────────────────୨ৎ────────────────────────
-𖤍 Server: http://localhost:${PORT}
+───────────────────────────୨ৎ────────────────────────
+𖤍 Server: ${url}
 
-𖤍 Documentation: http://localhost:${PORT}/docs
-─────────────────────────୨ৎ────────────────────────
+𖤍 Documentation: ${url}/docs
+───────────────────────────୨ৎ────────────────────────
 `)
 })
