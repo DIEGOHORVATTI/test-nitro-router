@@ -1,7 +1,7 @@
 import express from 'express'
 
 import { errorHandler } from '@/core/infra/http/middleware/errorHandler'
-import apiDocumentationHTML from '@/core/infra/http/shared/apiDocumentationHTML'
+import apiDocumentationHTML from '@/core/utils/apiDocumentationHTML'
 
 import { userRoutes } from '@/features/users/presentation/routes/userRoutes'
 

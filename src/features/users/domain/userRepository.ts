@@ -1,11 +1,8 @@
+import type { Paginated } from '@/core/utils/pagination'
+
 import { User } from './user'
 
-export type PaginatedUsers = {
-  users: User[]
-  total: number
-  page: number
-  limit: number
-}
+export type PaginatedUsers = Paginated<User>
 
 export type UserRepository = {
   findById(id: string): Promise<User | null>
