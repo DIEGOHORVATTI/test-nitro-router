@@ -1,14 +1,18 @@
 import express from 'express'
 
+import { errorHandler } from '@/core/infra/http/middleware/errorHandler'
 import apiDocumentationHTML from '@/core/infra/http/shared/apiDocumentationHTML'
 
 import { userRoutes } from '@/features/users/presentation/routes/userRoutes'
-import { errorHandler } from '@/core/infra/http/middleware/errorHandler'
 
 const app = express()
 app.use(express.json())
 
 app.use(userRoutes.export())
+
+app.use('/', (_, res) => {
+  return res.json({ status: 'ok' })
+})
 
 // Endpoint para retornar a documentação OpenAPI
 app.get('/docs', (_, res) => {

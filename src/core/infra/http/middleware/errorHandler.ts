@@ -2,6 +2,8 @@ import { NextFunction, Request, Response } from 'express'
 import { HttpError } from '../errors/httpError'
 
 export const errorHandler = (err: Error, _req: Request, res: Response, _next: NextFunction) => {
+  console.log(err)
+
   if (err instanceof HttpError) {
     return res.status(err.status).json({
       error: err.name,
