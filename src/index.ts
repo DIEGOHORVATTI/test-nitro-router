@@ -10,11 +10,13 @@ const url = `http://localhost:${PORT}`
 const app = express()
 app.use(express.json())
 
-app.use(userRoutes.export())
-
-app.get('/', () => {
-  return 'Welcome to the Nitro Router API'
+app.get('/', (_req, res) => {
+  return res.json({
+    message: 'Welcome to the Nitro Router API',
+  })
 })
+
+app.use(userRoutes.export())
 
 app.get('/docs', (_, res) => {
   res.send(
