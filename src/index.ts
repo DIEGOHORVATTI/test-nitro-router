@@ -10,8 +10,8 @@ app.use(express.json())
 
 app.use(userRoutes.export())
 
-app.use('/', (_, res) => {
-  return res.json({ status: 'ok' })
+app.get('/', (_, res) => {
+  return res.json({ status: 'oks' })
 })
 
 // Endpoint para retornar a documentação OpenAPI
