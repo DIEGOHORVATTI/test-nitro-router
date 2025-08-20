@@ -1,6 +1,7 @@
 import express from 'express'
 
 import NR from 'nitro-router'
+
 import apiDocumentationHTML from '@/core/utils/apiDocumentationHTML'
 import errorHandler from '@/core/infra/http/middleware/errorHandler'
 

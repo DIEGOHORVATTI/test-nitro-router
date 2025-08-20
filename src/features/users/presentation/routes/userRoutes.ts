@@ -1,15 +1,14 @@
-import { NitroRouter } from 'nitro-router'
-import { z } from 'zod'
+import NR, { z } from 'nitro-router'
 
 import { userRepositoryImpl } from '../../infrastructure/userRepositoryImpl'
 
 import { makeCreateUser } from '../../application/createUser'
 import { makeListUsers } from '../../application/listUsers'
 
-export const userRoutes = new NitroRouter()
+export const userRoutes = new NR().group({ prefix: '/users', tags: ['Users'] })
 
 userRoutes.post(
-  '/users',
+  '/',
   async ({ body }) => {
     const result = await makeCreateUser(userRepositoryImpl)(body)
 
@@ -26,7 +25,7 @@ userRoutes.post(
 )
 
 userRoutes.get(
-  '/users',
+  '/',
   async ({ query: { page, limit } }) => {
     const result = await makeListUsers(userRepositoryImpl)(page, limit)
 
