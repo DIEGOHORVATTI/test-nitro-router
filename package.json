@@ -4,7 +4,6 @@
   "devDependencies": {
     "@eslint/js": "9.32.0",
     "@types/express": "5.0.3",
-    "@types/multer": "2.0.0",
     "@types/node": "24.2.0",
     "@typescript-eslint/eslint-plugin": "8.39.0",
     "@typescript-eslint/parser": "8.39.0",
@@ -18,9 +17,7 @@
     "typescript": "5.9.2"
   },
   "dependencies": {
-    "@asteasolutions/zod-to-openapi": "^8.1.0",
     "express": "^5.1.0",
-    "http-status-codes": "^2.3.0",
     "nitro-router": "latest",
     "zod": "^4.0.17"
   },

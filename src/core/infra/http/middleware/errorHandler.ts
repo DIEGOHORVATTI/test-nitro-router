@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { HttpError } from '../errors/httpError'
+import { HttpError } from 'nitro-router'
 import z from 'zod'
 
 export default function errorHandler(
@@ -21,8 +21,6 @@ export default function errorHandler(
       kind: 'ZodError',
     })
   }
-
-  console.log(err)
 
   return res.status(500).json({
     error: [err.message || 'Internal Server Error'],
