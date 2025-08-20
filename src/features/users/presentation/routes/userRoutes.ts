@@ -1,14 +1,10 @@
 import { NitroRouter } from 'nitro-router'
 import { z } from 'zod'
-import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi'
 
 import { userRepositoryImpl } from '../../infrastructure/userRepositoryImpl'
 
 import { makeCreateUser } from '../../application/createUser'
 import { makeListUsers } from '../../application/listUsers'
-
-// Extend Zod with OpenAPI functionality
-extendZodWithOpenApi(z)
 
 export const userRoutes = new NitroRouter()
 
