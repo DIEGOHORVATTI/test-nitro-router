@@ -1,6 +1,5 @@
 export type Ok<T> = {
   ok: true
-  value: T
 }
 
 export type Err<E> = {

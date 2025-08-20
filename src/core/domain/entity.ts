@@ -1,4 +1,3 @@
-export type Entity<T> = {
+export type Entity<T> = T & {
   id: string
-  props: T
 }

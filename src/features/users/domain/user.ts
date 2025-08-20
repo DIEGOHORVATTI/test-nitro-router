@@ -9,5 +9,5 @@ export type User = Entity<UserProps>
 
 export const createUser = (props: UserProps, id?: string): User => ({
   id: id || crypto.randomUUID(),
-  props,
+  ...props,
 })

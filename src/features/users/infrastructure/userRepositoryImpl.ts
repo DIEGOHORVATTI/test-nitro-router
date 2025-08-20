@@ -12,7 +12,7 @@ export const userRepositoryImpl: UserRepository = {
   },
 
   async findByEmail(email) {
-    return users.find((user) => user.props.email === email) || null
+    return users.find((user) => user.email === email) || null
   },
 
   async findAll(page, limit) {

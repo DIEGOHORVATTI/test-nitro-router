@@ -1,8 +1,6 @@
-import { constError } from './httpError'
+import { error } from 'nitro-router'
 
-export const badRequest = (error: string, details?: string) =>
-  constError('BAD_REQUEST', error, details)
-export const notFound = (error: string, details?: string) => constError('NOT_FOUND', error, details)
-export const conflict = (error: string, details?: string) => constError('CONFLICT', error, details)
-export const internal = (error: string, details?: string) =>
-  constError('INTERNAL_SERVER_ERROR', error, details)
+export const badRequest = (message: string) => error('BAD_REQUEST', message)
+export const notFound = (message: string) => error('NOT_FOUND', message)
+export const conflict = (message: string) => error('CONFLICT', message)
+export const internal = (message: string) => error('INTERNAL_SERVER_ERROR', message)

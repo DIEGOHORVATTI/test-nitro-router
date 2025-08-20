@@ -11,16 +11,21 @@ export default function errorHandler(
   if (err instanceof HttpError) {
     return res.status(err.status).json({
       error: [err.message || 'Internal Server Error'],
+      kind: 'HttpError',
     })
   }
 
   if (err instanceof z.ZodError) {
     return res.status(400).json({
       error: err.issues.map((issue) => issue.message) || ['Validation Error'],
+      kind: 'ZodError',
     })
   }
 
+  console.log(err)
+
   return res.status(500).json({
     error: [err.message || 'Internal Server Error'],
+    kind: 'InternalServerError',
   })
 }
