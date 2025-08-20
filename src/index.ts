@@ -1,22 +1,35 @@
 import express from 'express'
 
-import { userRoutes } from './features/users/presentation/routes/userRoutes'
-import { errorHandler } from './core/infra/http/middleware/errorHandler'
-import apiDocumentationHTML from './core/utils/apiDocumentationHTML'
+import NR from 'nitro-router'
+import apiDocumentationHTML from '@/core/utils/apiDocumentationHTML'
+import errorHandler from '@/core/infra/http/middleware/errorHandler'
 
-const PORT = 8000
-const url = `http://localhost:${PORT}`
+import { userRoutes } from '@/features/users/presentation/routes/userRoutes'
 
 const app = express()
 app.use(express.json())
 
-app.get('/', (_req, res) => {
-  return res.json({
-    message: 'Welcome to the Nitro Router API',
-  })
-})
+const PORT = 8000
+const url = `http://localhost:${PORT}`
 
+const route = new NR()
+
+route.get(
+  '/',
+  () => {
+    return { message: 'Bem-vindo à API!' }
+  },
+  {
+    summary: 'Página inicial',
+    tags: ['Home'],
+  }
+)
+
+// Exportar o router para o Express
+app.use(route.export())
 app.use(userRoutes.export())
+
+app.use(errorHandler)
 
 app.get('/docs', (_, res) => {
   res.send(
@@ -31,8 +44,6 @@ app.get('/docs', (_, res) => {
     })
   )
 })
-
-app.use(errorHandler)
 
 app.listen(PORT, () => {
   console.log(`
